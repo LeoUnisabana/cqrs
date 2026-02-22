@@ -1,0 +1,8 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: cqrs
+    description: Demo CQRS
+    version: 1.0.0
