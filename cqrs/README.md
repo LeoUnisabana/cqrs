@@ -1,4 +1,4 @@
-# CQRS Biblioteca – Spring Boot Demo
+# Demo patrón CQRS Biblioteca 
 
 ## Descripción
 
@@ -106,6 +106,31 @@ Expone los endpoints REST, delegando la lógica a los handlers. No contiene lóg
 
 ```mermaid
 classDiagram
+    %% === HANDLERS ===
+    class RegistrarLibroCommandHandler
+    class PrestarLibroCommandHandler
+    class DevolverLibroCommandHandler
+    class ObtenerLibroQueryHandler
+    <<handler>> RegistrarLibroCommandHandler
+    <<handler>> PrestarLibroCommandHandler
+    <<handler>> DevolverLibroCommandHandler
+    <<handler>> ObtenerLibroQueryHandler
+
+    %% === COMMANDS ===
+    class RegistrarLibroCommand
+    class PrestarLibroCommand
+    class DevolverLibroCommand
+    <<command>> RegistrarLibroCommand
+    <<command>> PrestarLibroCommand
+    <<command>> DevolverLibroCommand
+
+    %% === QUERIES ===
+    class ObtenerLibroQuery
+    class LibroResponse
+    <<query>> ObtenerLibroQuery
+    <<query>> LibroResponse
+
+    %% === DOMAIN & REPOSITORY ===
     class Libro {
         +String id
         +String titulo
@@ -115,34 +140,32 @@ classDiagram
         +devolver()
         +estaDisponible()
     }
-    class RegistrarLibroCommand
-    class PrestarLibroCommand
-    class DevolverLibroCommand
-    class ObtenerLibroQuery
-    class LibroResponse
-
-    class RegistrarLibroCommandHandler
-    class PrestarLibroCommandHandler
-    class DevolverLibroCommandHandler
-    class ObtenerLibroQueryHandler
-
+    <<domain>> Libro
     class LibroRepository
+    <<repository>> LibroRepository
 
-    RegistrarLibroCommandHandler --> RegistrarLibroCommand
-    RegistrarLibroCommandHandler --> LibroRepository
-    RegistrarLibroCommandHandler --> Libro
+    %% === RELACIONES (de arriba hacia abajo) ===
+    %% Command Handlers
+    RegistrarLibroCommandHandler --> RegistrarLibroCommand : ejecuta
+    RegistrarLibroCommandHandler --> Libro : crea
+    RegistrarLibroCommandHandler --> LibroRepository : guarda
 
-    PrestarLibroCommandHandler --> PrestarLibroCommand
-    PrestarLibroCommandHandler --> LibroRepository
-    PrestarLibroCommandHandler --> Libro
+    PrestarLibroCommandHandler --> PrestarLibroCommand : ejecuta
+    PrestarLibroCommandHandler --> Libro : modifica
+    PrestarLibroCommandHandler --> LibroRepository : consulta/guarda
 
-    DevolverLibroCommandHandler --> DevolverLibroCommand
-    DevolverLibroCommandHandler --> LibroRepository
-    DevolverLibroCommandHandler --> Libro
+    DevolverLibroCommandHandler --> DevolverLibroCommand : ejecuta
+    DevolverLibroCommandHandler --> Libro : modifica
+    DevolverLibroCommandHandler --> LibroRepository : consulta/guarda
 
-    ObtenerLibroQueryHandler --> ObtenerLibroQuery
-    ObtenerLibroQueryHandler --> LibroRepository
-    ObtenerLibroQueryHandler --> LibroResponse
+    %% Query Handler
+    ObtenerLibroQueryHandler --> ObtenerLibroQuery : ejecuta
+    ObtenerLibroQueryHandler --> LibroRepository : consulta
+    ObtenerLibroQueryHandler --> LibroResponse : retorna
+
+    %% === Agrupación visual (comentarios) ===
+    %% Handlers arriba, Commands/Queries al centro, Dominio/Repositorio abajo
+    %% Flechas solo hacia abajo para evitar cruces
 ```
 
 ---
@@ -173,7 +196,7 @@ flowchart TD
 
 ---
 
-## Conclusión académica
+## Conclusión 
 
 La arquitectura CQRS, combinada con Clean Architecture, permite una separación clara de responsabilidades, facilitando la escalabilidad, el mantenimiento y la explicación didáctica de los flujos de negocio. CQRS es recomendable en sistemas donde la complejidad de lectura y escritura requiere evoluciones independientes, o cuando se busca claridad en la presentación de conceptos arquitectónicos.
 
