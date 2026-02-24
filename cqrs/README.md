@@ -195,9 +195,3 @@ flowchart TD
 ```
 
 ---
-
-## Conclusión 
-
-La arquitectura CQRS, combinada con Clean Architecture, permite una separación clara de responsabilidades, facilitando la escalabilidad, el mantenimiento y la explicación didáctica de los flujos de negocio. CQRS es recomendable en sistemas donde la complejidad de lectura y escritura requiere evoluciones independientes, o cuando se busca claridad en la presentación de conceptos arquitectónicos.
-
----

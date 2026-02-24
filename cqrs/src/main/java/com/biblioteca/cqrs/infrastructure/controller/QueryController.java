@@ -1,4 +1,4 @@
-package com.biblioteca.cqrs.controller;
+package com.biblioteca.cqrs.infrastructure.controller;
 
 import com.biblioteca.cqrs.application.query.ObtenerLibroQuery;
 import com.biblioteca.cqrs.application.handler.ObtenerLibroQueryHandler;

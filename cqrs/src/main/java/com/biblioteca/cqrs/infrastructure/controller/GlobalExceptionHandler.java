@@ -1,4 +1,4 @@
-package com.biblioteca.cqrs.controller;
+package com.biblioteca.cqrs.infrastructure.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
