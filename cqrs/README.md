@@ -1,5 +1,19 @@
 # Demo patrón CQRS Biblioteca 
 
+# Grupo 9. Integrantes:
+Angie Lorena Prieto Dominguez
+
+Rosemberg Porras Mancilla
+
+Ivan Felipe Vera Triana
+
+Juan Felipe Gonzalez Ortiz
+
+Leonardo Pérez Ramírez
+
+---
+
+
 ## Descripción
 
 Este proyecto es una demostración académica de la arquitectura CQRS (Command Query Responsibility Segregation) aplicada sobre Clean Architecture usando Spring Boot. El objetivo es mostrar de forma didáctica cómo separar completamente el modelo de escritura (commands) del modelo de lectura (queries) en un sistema de gestión de biblioteca.
@@ -31,9 +45,10 @@ com.biblioteca.cqrs
 │   └── handler        # Orquestadores de comandos y queries
 ├── domain
 │   └── Libro          # Lógica de negocio y entidades del dominio
-├── infrastructure
-│   └── repository     # Repositorios en memoria (HashMap)
-└── controller         # Exposición de endpoints REST
+└── infrastructure
+    ├── controller     # Exposición de endpoints REST
+    └── repository     # Repositorios en memoria (HashMap)
+
 ```
 
 ### Domain
